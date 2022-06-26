@@ -28,15 +28,18 @@ export const auth = getAuth();
 
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
+export const signInWithGoogleRedirect = () =>
+   signInWithRedirect(auth, provider);
+
 const db = getFirestore();
 
 export const createUserDocWithAuth = async (userAuth) => {
    const userDocRef = doc(db, "users", userAuth.uid);
-   console.log(userDocRef);
+   // console.log(userDocRef);
 
    const userSnapshoot = await getDoc(userDocRef);
-   console.log(userSnapshoot);
-   console.log(userSnapshoot.exists());
+   // console.log(userSnapshoot);
+   // console.log(userSnapshoot.exists());
 
    if (!userSnapshoot.exists()) {
       const { displayName, email } = userAuth;
