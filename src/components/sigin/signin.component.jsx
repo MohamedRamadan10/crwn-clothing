@@ -6,6 +6,7 @@ import {
    signInWithGooglePopup,
    signInWithGoogleRedirect,
 } from "../../utils/firebase/firebase.utils";
+import Signup from "../signup/signup.component";
 
 const SingIn = () => {
    useEffect(() => {
@@ -30,6 +31,7 @@ const SingIn = () => {
          <button onClick={signInWithGoogleRedirect}>
             Sign in with Google Redirect
          </button>
+         <Signup />
       </>
    );
 };
