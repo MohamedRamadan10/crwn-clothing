@@ -3,6 +3,10 @@ import {
    createUserAuthWithEmailAndPassword,
    createUserDocWithAuth,
 } from "../../utils/firebase/firebase.utils";
+import Button from "../button/button.component";
+import FormInput from "../form-input/form-input.componet";
+
+import "./signup.styles.scss";
 
 export default function Signup() {
    const defaultFormFileds = {
@@ -53,51 +57,48 @@ export default function Signup() {
    };
 
    return (
-      <>
-         <h1>Signup with email and password</h1>
+      <div className='signup-container'>
+         <h2>Don't have an account, create new</h2>
+         <span>Signup with email and password</span>
          <form onSubmit={handleSubmit}>
-            <label htmlFor='displayName'>Display Name</label>
-            <input
+            <FormInput
+               label='Display Name'
                type='text'
                name='displayName'
-               id='displayName'
                onChange={handleChange}
                value={displayName}
                required
             />
 
-            <label htmlFor='email'>Email Address</label>
-            <input
+            <FormInput
+               label='Email Address'
                type='email'
                name='email'
-               id='email'
                onChange={handleChange}
                value={email}
                required
             />
 
-            <label htmlFor='password'>Passowrd</label>
-            <input
+            <FormInput
+               label='Passowrd'
                type='password'
                name='password'
-               id='password'
                value={password}
                onChange={handleChange}
                required
             />
 
-            <label htmlFor='confirmPassword'>Confirm Passowrd</label>
-            <input
+            <FormInput
+               label='Confirm Passowrd'
                type='password'
                name='confirmPassword'
-               id='confirmPassword'
                value={confirmPassword}
                onChange={handleChange}
                required
             />
 
-            <button type='submit'>Sgin Up</button>
+            <Button type='submit'>Sgin Up</Button>
          </form>
-      </>
+      </div>
    );
 }
