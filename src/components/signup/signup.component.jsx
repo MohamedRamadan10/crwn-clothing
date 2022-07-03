@@ -1,6 +1,8 @@
 import { getRedirectResult } from "firebase/auth";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { UserContext } from "../../contexts/user.context";
 import {
    createUserAuthWithEmailAndPassword,
    createUserDocWithAuth,
@@ -22,6 +24,10 @@ export default function Signup() {
    const [formFields, setFormFields] = useState(defaultFormFileds);
 
    const { displayName, email, password, confirmPassword } = formFields;
+
+   const val = useContext(UserContext);
+
+   console.log("hit", val);
 
    useEffect(() => {
       const fetchUserData = async () => {
@@ -78,8 +84,8 @@ export default function Signup() {
                label='Display Name'
                type='text'
                name='displayName'
-               onChange={handleChange}
                value={displayName}
+               onChange={handleChange}
                required
             />
 
@@ -87,8 +93,8 @@ export default function Signup() {
                label='Email Address'
                type='email'
                name='email'
-               onChange={handleChange}
                value={email}
+               onChange={handleChange}
                required
             />
 
