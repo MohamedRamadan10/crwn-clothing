@@ -1,7 +1,10 @@
+import { getRedirectResult } from "firebase/auth";
+import { useEffect } from "react";
 import { useState } from "react";
 import {
    createUserAuthWithEmailAndPassword,
    createUserDocWithAuth,
+   auth,
 } from "../../utils/firebase/firebase.utils";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.componet";
@@ -19,6 +22,16 @@ export default function Signup() {
    const [formFields, setFormFields] = useState(defaultFormFileds);
 
    const { displayName, email, password, confirmPassword } = formFields;
+
+   useEffect(() => {
+      const fetchUserData = async () => {
+         const res = await getRedirectResult(auth);
+         if (res) {
+            await createUserDocWithAuth(res.user);
+         }
+      };
+      fetchUserData();
+   }, []);
 
    const resetForm = () => {
       setFormFields(defaultFormFileds);
@@ -97,7 +110,9 @@ export default function Signup() {
                required
             />
 
-            <Button type='submit'>Sgin Up</Button>
+            <Button buttonType='inverted' type='submit'>
+               Sgin Up
+            </Button>
          </form>
       </div>
    );
