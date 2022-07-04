@@ -1,8 +1,5 @@
-import { useContext } from "react";
 import { useState } from "react";
-import { UserContext } from "../../contexts/user.context";
 import {
-   createUserDocWithAuth,
    SignInAuthWithEmailAndPassword,
    signInWithGooglePopup,
    signInWithGoogleRedirect,
@@ -22,29 +19,23 @@ export default function Signin() {
 
    const { email, password } = formFields;
 
-   const { setCurrentUser } = useContext(UserContext);
-
    const resetForm = () => {
       setFormFields(defaultFormFileds);
    };
 
    const signInWithGoogle = async () => {
-      const { user } = await signInWithGooglePopup();
-      await createUserDocWithAuth(user);
+      await signInWithGooglePopup();
    };
 
    const signInWithGoogleSameTab = async () => {
-      const { user } = await signInWithGoogleRedirect();
-      await createUserDocWithAuth(user);
+      await signInWithGoogleRedirect();
    };
 
    const handleSubmit = async (e) => {
       e.preventDefault();
 
       try {
-         const { user } = await SignInAuthWithEmailAndPassword(email, password);
-
-         setCurrentUser(user);
+         await SignInAuthWithEmailAndPassword(email, password);
 
          resetForm();
       } catch (error) {
