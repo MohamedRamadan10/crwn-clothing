@@ -25,9 +25,7 @@ export default function Signup() {
 
    const { displayName, email, password, confirmPassword } = formFields;
 
-   const val = useContext(UserContext);
-
-   console.log("hit", val);
+   const { setCurrentUser } = useContext(UserContext);
 
    useEffect(() => {
       const fetchUserData = async () => {
@@ -58,6 +56,8 @@ export default function Signup() {
          );
 
          await createUserDocWithAuth(user, { displayName });
+
+         setCurrentUser(user);
 
          resetForm();
       } catch (error) {
